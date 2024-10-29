@@ -4,9 +4,11 @@
  * Module dependencies.
  */
 
-const app = require('../app.ts');
-const debug = require('debug')('onyx-crypto-exchange-backend:server');
-const http = require('http');
+import app from '../app';
+import debug2 from 'debug';
+import http from 'http';
+
+const debug = debug2('onyx-crypto-exchange-backend:server');
 
 /**
  * Get port from environment and store in Express.
@@ -33,7 +35,7 @@ server.on('listening', onListening);
  * Normalize a port into a number, string, or false.
  */
 
-function normalizePort(val) {
+function normalizePort(val: string) {
   const port = parseInt(val, 10);
 
   if (isNaN(port)) {
@@ -53,14 +55,12 @@ function normalizePort(val) {
  * Event listener for HTTP server "error" event.
  */
 
-function onError(error) {
+function onError(error: Error & { code: string; syscall: string }) {
   if (error.syscall !== 'listen') {
     throw error;
   }
 
-  const bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
@@ -83,8 +83,7 @@ function onError(error) {
 
 function onListening() {
   const addr = server.address();
-  const bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
+  const bind =
+    typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr?.port;
   debug('Listening on ' + bind);
 }

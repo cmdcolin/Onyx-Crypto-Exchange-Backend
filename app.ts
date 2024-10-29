@@ -1,10 +1,9 @@
-var express = require('express');
-const createError = require('http-errors');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-
-const routes = require('./routes/routes.ts');
+import express, { Request, Response } from 'express';
+import createError from 'http-errors';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import routes from './routes/routes';
 
 const app = express();
 
@@ -22,7 +21,11 @@ app.use(function (req, res, next) {
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use(function (
+	err: { message: string; status: number },
+	req: Request,
+	res: Response,
+) {
 	// set locals, only providing error in development
 	res.locals.message = err.message;
 	res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -31,4 +34,4 @@ app.use(function (err, req, res, next) {
 	res.status(err.status || 500);
 });
 
-module.exports = app;
+export default app;

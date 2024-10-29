@@ -3,14 +3,20 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "tsx ./bin/www",
+    "tsc": "tsc --noEmit"
   },
   "dependencies": {
+    "@types/cookie-parser": "^1.4.7",
+    "@types/debug": "^4.1.12",
+    "@types/express": "^4.0.0",
+    "@types/morgan": "^1.9.9",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "tsx": "^4.19.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.12.0",
